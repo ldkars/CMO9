@@ -1,5 +1,10 @@
+#include "request.h"
 
-Request::Request()
+Request::Request(double TimeOfGeneration)
 {
-
+    TimeGeneration = TimeOfGeneration;
 }
+
+double Request::getTimeGeneration(){
+    return TimeGeneration;
+};

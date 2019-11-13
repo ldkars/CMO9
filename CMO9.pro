@@ -19,12 +19,14 @@ SOURCES += \
     buffer.cpp \
     main.cpp \
     mainwindow.cpp \
-    request.cpp
+    request.cpp \
+    source.cpp
 
 HEADERS += \
     buffer.h \
     mainwindow.h \
-    request.h
+    request.h \
+    source.h
 
 FORMS += \
     mainwindow.ui

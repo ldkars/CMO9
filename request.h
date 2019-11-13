@@ -5,7 +5,10 @@
 class Request
 {
 public:
-    Request();
+    Request(double TimeGeneration);
+    double getTimeGeneration();
+private:
+    double TimeGeneration;
 };
 
 #endif // REQUEST_H
