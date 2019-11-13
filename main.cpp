@@ -6,10 +6,14 @@
 #include "source.h"
 #include "request.h"
 
-int main(int argc, char *argv[])
+int main()
 {
+    int count_source = 3; // входные параметры
+    int count_device = 2;
+    int count_buffer = 3;
+
     Source source;
-    Request req = source.generationReqest();
+    Request req = source.generationReqest(); // может не стоит возвращать заявку
     std::cout << req.getTimeGeneration() << std::endl;
     //QApplication a(argc, argv);
     //MainWindow w;
