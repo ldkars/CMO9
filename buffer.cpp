@@ -1,8 +1,8 @@
 #include "buffer.h"
 
-Buffer::Buffer()
+Buffer::Buffer(int size)
 {
-
+    this->size = size;
 }
 
 void Buffer::insert(Request req)
@@ -13,4 +13,8 @@ void Buffer::insert(Request req)
 Request Buffer::getreq()
 {
     return vec[0]; //!!
+}
+
+bool Buffer::checkFree(Request request){
+    return true; //!!
 }

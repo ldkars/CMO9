@@ -6,10 +6,13 @@
 class Buffer
 {
 public:
-    Buffer();
+    Buffer(int size);
     std::vector<Request> vec;
     void insert(Request req);
     Request getreq();
+    bool checkFree(Request request);
+private:
+    int size;
 };
 
 #endif // BUFFER_H
