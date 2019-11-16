@@ -1,8 +1,10 @@
 #include "request.h"
 
-Request::Request(double TimeOfGeneration)
+Request::Request(double TimeGeneration, int counter, int numberOfSource)
 {
-    TimeGeneration = TimeOfGeneration;
+    this->TimeGeneration = TimeGeneration;
+    this->numberOfSource = numberOfSource;
+    this->counter = counter;
 }
 
 double Request::getTimeGeneration(){

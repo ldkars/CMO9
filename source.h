@@ -5,8 +5,12 @@
 class Source
 {
 public:
-    Source();
+    Source(int numberOfSource);
     Request generationReqest();
+private:
+    int counter;
+    int numberOfSource;
+    double time_generation;
 };
 
 #endif // SOURCE_H

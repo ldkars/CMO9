@@ -5,10 +5,12 @@
 class Request
 {
 public:
-    Request(double TimeGeneration);
+    Request(double TimeGeneration, int counter, int numberOfSource);
     double getTimeGeneration();
 private:
     double TimeGeneration;
+    int counter;
+    int numberOfSource;
 };
 
 #endif // REQUEST_H
