@@ -4,15 +4,15 @@
 #include "request.h"
 #include "buffercontroller.h"
 #include "booc.h"
-
 int main()
 {
-    size_t buffer_size = 3;
+    size_t buffer_size = 5;
 
     BufferController bufferController(buffer_size);
     BOOC booc(bufferController);
 
     booc.START();
+
 
 
     //QApplication a(argc, argv);
