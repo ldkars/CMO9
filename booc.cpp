@@ -10,11 +10,13 @@ BOOC::BOOC(int count_source, int count_device)
 
 void BOOC::START(BufferController bufferController){
     //количество заявок N от каждого источника
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; i < vector_source.size(); i++){
-            bufferController.insert(vector_source[j].generationReqest());
-        }
-    }
+   // for(int i = 0; i < 10; i++){
+     //   for(int j = 0; i < vector_source.size(); i++){
+       //     bufferController.insert(vector_source[j].generationReqest());
+        //}
+    //}
+    bufferController.insert(vector_source[0].generationReqest());
+    qDebug() << bufferController.getRequestOutBuffer().getTimeGeneration();
 }
 
 void BOOC::createSource(int count_source){

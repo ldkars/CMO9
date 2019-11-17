@@ -13,9 +13,13 @@ BufferController::BufferController(int count_buffer)
 void BufferController::insert(Request request){
     for(int i = 0; i < count_buffer; i++){
         if(vector_buffer[i].checkFree(request)){
-            qDebug() << request.getTimeGeneration();
+            vector_buffer[i].insert(request);
             return;
         }
     }
     qDebug() << "Не вставили";
+}
+
+Request BufferController::getRequestOutBuffer(){
+   return vector_buffer[0].getRequest();
 }

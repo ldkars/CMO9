@@ -9,6 +9,7 @@ class BufferController
 public:
     BufferController(int count_buffer);
     void insert(Request request);
+    Request getRequestOutBuffer();
 private:
     int count_buffer;
     std::vector<Buffer> vector_buffer;

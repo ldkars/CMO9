@@ -1,18 +1,27 @@
 #include "buffer.h"
 
-Buffer::Buffer(int size)
+Buffer::Buffer(size_t size)
 {
     this->size = size;
+    this->pointer = 0;
+    Request request(0, 0, 0);
+    for(int i = 0; i < size; i++) vec.push_back(request);
 }
 
-void Buffer::insert(Request req)
+void Buffer::insert(Request request)
 {
-    vec.push_back(req); // вставка вектора вариант 18
+    for(int pointer = this->pointer; pointer < size; pointer++){
+        if(vec[pointer].getTimeGeneration() == 0.0){
+            vec[pointer] = request;
+            this->pointer = pointer;
+            //return;
+       }
+    }
 }
 
-Request Buffer::getreq()
+Request Buffer::getRequest()
 {
-    return vec[0]; //!!
+    return vec[pointer];
 }
 
 bool Buffer::checkFree(Request request){
