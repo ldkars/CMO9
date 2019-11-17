@@ -17,9 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     booc.cpp \
-    buffer.cpp \
     buffercontroller.cpp \
-    device.cpp \
     main.cpp \
     mainwindow.cpp \
     request.cpp \
@@ -27,9 +25,7 @@ SOURCES += \
 
 HEADERS += \
     booc.h \
-    buffer.h \
     buffercontroller.h \
-    device.h \
     mainwindow.h \
     request.h \
     source.h

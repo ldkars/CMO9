@@ -1,18 +1,17 @@
 #ifndef BUFFERCONTROLLER_H
 #define BUFFERCONTROLLER_H
-// сюда приходит заявка и он уже сам думает как ему танцевать;
+
 #include "request.h"
-#include "buffer.h"
 #include "vector"
+
 class BufferController
 {
 public:
-    BufferController(int count_buffer);
+    BufferController(size_t buffer_size);
     void insert(Request request);
     Request getRequestOutBuffer();
 private:
-    int count_buffer;
-    std::vector<Buffer> vector_buffer;
+    size_t buffer_size;
     bool checkFree(Request request);
 };
 

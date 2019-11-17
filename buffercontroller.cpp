@@ -1,25 +1,13 @@
 #include "buffercontroller.h"
 #include <QDebug>
-BufferController::BufferController(int count_buffer)
+BufferController::BufferController(size_t buffer_size)
 {
-    this->count_buffer = count_buffer;
-    for(int i = 0; i < count_buffer; i++){
-        int size_buffer = 5;
-        Buffer buffer(size_buffer);
-        vector_buffer.push_back(buffer);
-    }
+    this->buffer_size = buffer_size;
 }
 
 void BufferController::insert(Request request){
-    for(int i = 0; i < count_buffer; i++){
-        if(vector_buffer[i].checkFree(request)){
-            vector_buffer[i].insert(request);
-            return;
-        }
-    }
-    qDebug() << "Не вставили";
 }
 
 Request BufferController::getRequestOutBuffer(){
-   return vector_buffer[0].getRequest();
+   return Request(0,0,0);
 }

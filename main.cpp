@@ -7,13 +7,14 @@
 
 int main()
 {
-    int count_source = 3; // входные параметры
-    int count_device = 2;
-    int count_buffer = 3;
+    size_t buffer_size = 3;
 
-    BOOC booc(count_source, count_device);
-    BufferController bufferController(count_buffer);
-    booc.START(bufferController);
+    BufferController bufferController(buffer_size);
+    BOOC booc(bufferController);
+
+    booc.START();
+
+
     //QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
