@@ -6,7 +6,7 @@
 #include "booc.h"
 int main()
 {
-    size_t buffer_size = 5;
+    size_t buffer_size = 3;
 
     BufferController bufferController(buffer_size);
     BOOC booc(bufferController);
