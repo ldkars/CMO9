@@ -8,6 +8,7 @@ public:
     Request(double TimeGeneration, int counter, int numberOfSource);
     double getTimeGeneration();
     int getNumberOfSource(){ return numberOfSource; }
+    int getCounter(){return counter;}
 private:
     double TimeGeneration;
     int counter;
