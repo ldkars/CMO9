@@ -9,8 +9,18 @@ void BOOC::START(){
 
     //ATTENCION! bufferController::getMinNumberOfSource всего 3 источник!
     linkBufferController->insert(Request(228, 1, 2));
-    linkBufferController->insert(Request(229, 1, 1));
+    linkBufferController->insert(Request(229, 1, 3));
     linkBufferController->insert(Request(230, 1, 3));
+    linkBufferController->insert(Request(231, 1, 2));
+    linkBufferController->insert(Request(232, 1, 2));
+    linkBufferController->insert(Request(233, 1, 3));
+    linkBufferController->insert(Request(234, 1, 2));
+    linkBufferController->insert(Request(235, 1, 1));
+    linkBufferController->insert(Request(236, 1, 3));
+    linkBufferController->insert(Request(230, 1, 3));
+    linkBufferController->insert(Request(233, 1, 3));
+    //linkBufferController->insert(Request(234, 1, 2));
+    linkBufferController->buffPrint();
     Request req(0,0,0);
     req = linkBufferController->getRequest();
     qDebug() << req.getTimeGeneration();
