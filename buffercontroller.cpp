@@ -7,25 +7,27 @@ BufferController::BufferController(size_t buffer_size)
     this->buffer_size = buffer_size;
     this->pointer = 0;
     for(size_t i = 0; i < buffer_size; i++)
-        vec.push_back(Request(0, 0, 0));
+        vec.push_back(generationEmptyRequest());
     error = 0;
 }
 
 void BufferController::insert(Request request){
     for(size_t i = pointer; i < buffer_size * 2; i++){
-        if( vec[GetIndex(i, buffer_size)].getTimeGeneration() == 0.0 )
+        if(requestEmpty(vec[GetIndex(i, buffer_size)]))
         {
             vec[GetIndex(i, buffer_size)] = request;
-            pointer = GetIndex(i, buffer_size);
+            pointer = GetIndex(i + 1, buffer_size);
             return;
         }
     }
     error++;
+    vec[pointer] = request;
+    pointer = GetIndex(pointer + 1, buffer_size);
 }
 
 Request BufferController::getRequest(){
     std::vector<Request> vec_priority; //содержит самые "свежие" заявки
-    int min_source = getMinNumberSource();
+    int min_source = getMinNumberSource(); // поиск по приоритету источника
 
     for(size_t i = 0; i < buffer_size; i++){
         if(vec[i].getNumberOfSource() == min_source)
@@ -33,14 +35,16 @@ Request BufferController::getRequest(){
     }
 
     double min_time = vec_priority[0].getTimeGeneration();
-    size_t index = 0;
+    size_t index = 0; // поиск индекса минимального по времени
     for(size_t i = 0; i < vec_priority.size(); i++){
         if(vec_priority[i].getTimeGeneration() < min_time){
             min_time = vec_priority[i].getTimeGeneration();
             index = i;
         }
     }
-    return vec_priority[index];
+    Request resault_request = vec_priority[index];
+    vec_priority[index] = Request(0,0,200);
+    return resault_request;
 }
 
 int BufferController::getMinNumberSource(){ //
@@ -50,6 +54,19 @@ int BufferController::getMinNumberSource(){ //
             min_number_source = vec[i].getNumberOfSource();
     }
     return min_number_source;
+}
+
+bool BufferController::requestEmpty(Request request){
+    if(request.getTimeGeneration() == 0.0
+                    && request.getCounter() == 0
+                      && request.getNumberOfSource() == 200)
+        return true;
+    else false;
+}
+
+
+Request BufferController::generationEmptyRequest(){
+    return Request(0,0,200);
 }
 
 
