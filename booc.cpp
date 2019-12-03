@@ -1,30 +1,31 @@
 #include "booc.h"
 #define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
-BOOC::BOOC(BufferController &bufferController, DeviceController &deviceController)
+BOOC::BOOC(BufferController &bufferController, DeviceController &deviceController, double alpha, double beta, int count_source, int count_generation)
 {
     this->linkBufferController = &bufferController;
     this->linkDeviceController = &deviceController;
+    this->alpha = alpha;
+    this->beta = beta;
+    this->count_source = count_source;
+    this->count_generation = count_generation;
 }
 
 void BOOC::START(){
-
-    //ATTENCION! bufferController::getMinNumberOfSource всего 3 источник!
-
-    Source source1(1);
-    Source source2(2);
-    Source source3(3);
     std::vector<Source> vector_source;
-    vector_source.push_back(source1);
-    vector_source.push_back(source2);
-    vector_source.push_back(source3);
+    for(int i = 1; i <= count_source; i++){
+        Source source(i, this->alpha, this->beta);
+        vector_source.push_back(source);
+    }
 
-    int countGeneration = 100;
-    for(int j = 0; j < countGeneration; j++){
+    for(int j = 0; j < this->count_generation; j++)
+    {
         for(int i = 0; i < vector_source.size(); i++){
-            linkBufferController->insert(vector_source[GetIndex(i, 3)].generationReqest());
+            linkBufferController->insert(vector_source[GetIndex(i, this->count_source)].generationReqest());
         }
+
         qDebug() << "------------------------";
+
         linkBufferController->buffPrint();
         for(int i = 0; i < linkBufferController->getBufferCountSize(); i++){
             Request copyRequest = linkBufferController->getCopyRequest();
@@ -32,6 +33,7 @@ void BOOC::START(){
                 linkDeviceController->insert(linkBufferController->getRequest());
             }
         }
+
         qDebug() << "----------------------------------------------";
         qDebug() << "         DEVICES";
         linkDeviceController->TESTPRINTDEVICE();

@@ -9,7 +9,7 @@
 class DeviceController
 {
 public:
-    DeviceController(size_t count_device);
+    DeviceController(size_t count_device, double lambda);
     void TESTPRINTDEVICE();
     bool insert(Request request);
     bool getStatusInsert(Request request);
@@ -19,6 +19,7 @@ private:
     std::vector<Device> vec_device;
     size_t pointer;
     int error;
+    double lambda = 0;
 };
 
 #endif // DEVICECONTROLLER_H

@@ -1,9 +1,11 @@
 #include "source.h"
 #include <QDebug>
 
-Source::Source(int numberOfSource)
+Source::Source(int numberOfSource, double alpha, double beta)
 {
     this->numberOfSource = numberOfSource;
+    this->alpha = alpha;
+    this->beta = beta;
 }
 
 Request Source::generationReqest(){

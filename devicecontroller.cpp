@@ -1,12 +1,12 @@
 #include "devicecontroller.h"
 
-DeviceController::DeviceController(size_t count_device)
+DeviceController::DeviceController(size_t count_device, double lambda)
 {
     this->count_device = count_device;
     this->pointer = 0;
-
+    this->lambda = lambda;
     for(size_t i = 0; i < count_device; i++)
-        vec_device.push_back(Device(i));
+        vec_device.push_back(Device(i, this->lambda));
 }
 
 bool DeviceController::insert(Request request){

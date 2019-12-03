@@ -70,10 +70,6 @@ Request BufferController::getCopyRequest(){
         }
     }
 
-   /* for(size_t i = 0; i < buffer_size; i++)
-        if(requestEqualRequest(vec_priority[index], vec[i]))
-            vec[i] = getEmptyRequest();*/
-
     Request resault_request = vec_priority[index];
     vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
     return resault_request;
@@ -81,6 +77,15 @@ Request BufferController::getCopyRequest(){
 
 int BufferController::getMinNumberSource(){
     size_t min_number_source = 3; // to-do
+    size_t tmp = 0; // ужас
+
+    for(size_t i = 0; i < vec.size(); i++){
+        if(vec[i].getNumberOfSource() > tmp){
+            tmp = vec[i].getNumberOfSource();
+        }
+    }
+    min_number_source = tmp;
+
     for(size_t i = 0; i < buffer_size; i++){
         if(vec[i].getNumberOfSource() < min_number_source)
             min_number_source = vec[i].getNumberOfSource();
