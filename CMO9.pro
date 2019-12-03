@@ -18,15 +18,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     booc.cpp \
     buffercontroller.cpp \
+    device.cpp \
+    devicecontroller.cpp \
     main.cpp \
     mainwindow.cpp \
+    random.cpp \
     request.cpp \
     source.cpp
 
 HEADERS += \
     booc.h \
     buffercontroller.h \
+    device.h \
+    devicecontroller.h \
     mainwindow.h \
+    random.h \
     request.h \
     source.h
 

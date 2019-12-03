@@ -27,10 +27,10 @@ void BufferController::insert(Request request){
 
 Request BufferController::getRequest(){
     std::vector<Request> vec_priority; //содержит самые "свежие" заявки
-    int min_source = getMinNumberSource(); // поиск по приоритету источника
 
+    // поиск по приоритету источника
     for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() == min_source)
+        if(vec[i].getNumberOfSource() == getMinNumberSource())
             vec_priority.push_back(vec[i]);
     }
 
@@ -42,15 +42,47 @@ Request BufferController::getRequest(){
             index = i;
         }
     }
+
+    for(size_t i = 0; i < buffer_size; i++)
+        if(requestEqualRequest(vec_priority[index], vec[i]))
+            vec[i] = getEmptyRequest();
+
     Request resault_request = vec_priority[index];
-    vec_priority[index] = Request(0,0,200);
+    vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
     return resault_request;
 }
 
-int BufferController::getMinNumberSource(){ //
-    size_t min_number_source = 3; //
+Request BufferController::getCopyRequest(){
+    std::vector<Request> vec_priority; //содержит самые "свежие" заявки
+
+    // поиск по приоритету источника
     for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() < 3)
+        if(vec[i].getNumberOfSource() == getMinNumberSource())
+            vec_priority.push_back(vec[i]);
+    }
+
+    double min_time = vec_priority[0].getTimeGeneration();
+    size_t index = 0; // поиск индекса минимального по времени
+    for(size_t i = 0; i < vec_priority.size(); i++){
+        if(vec_priority[i].getTimeGeneration() < min_time){
+            min_time = vec_priority[i].getTimeGeneration();
+            index = i;
+        }
+    }
+
+   /* for(size_t i = 0; i < buffer_size; i++)
+        if(requestEqualRequest(vec_priority[index], vec[i]))
+            vec[i] = getEmptyRequest();*/
+
+    Request resault_request = vec_priority[index];
+    vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
+    return resault_request;
+}
+
+int BufferController::getMinNumberSource(){
+    size_t min_number_source = 3; // to-do
+    for(size_t i = 0; i < buffer_size; i++){
+        if(vec[i].getNumberOfSource() < min_number_source)
             min_number_source = vec[i].getNumberOfSource();
     }
     return min_number_source;
@@ -64,14 +96,37 @@ bool BufferController::requestEmpty(Request request){
     else false;
 }
 
+bool BufferController::requestEqualRequest(Request request1, Request request2){
+    if(request1.getTimeGeneration() == request2.getTimeGeneration()
+            && request1.getCounter() == request2.getCounter()
+                && request1.getNumberOfSource() == request2.getNumberOfSource())
+    {
+        return true;
+    }
+    else return false;
+}
+
 
 Request BufferController::generationEmptyRequest(){
     return Request(0,0,200);
 }
 
+Request BufferController::getEmptyRequest(){
+    return Request(0,0,200);
+}
 
-
-
+int BufferController::getBufferCountSize(){
+    int buffersize = 0;
+    for(size_t i = 0; i < buffer_size; i++){
+        if(vec[i].getCounter() == getEmptyRequest().getCounter()
+                && vec[i].getNumberOfSource() == getEmptyRequest().getNumberOfSource()
+                  && vec[i].getTimeGeneration() == getEmptyRequest().getTimeGeneration()){
+        }else{
+            buffersize++;
+        }
+    }
+    return buffersize;
+}
 
 
 
@@ -103,5 +158,5 @@ void BufferController::buffDelete(size_t index){
 
 void BufferController::buffPrint(){
     for(size_t i = 0; i < buffer_size; i++)
-        qDebug() << "buff print: " << vec[i].getTimeGeneration();
+        qDebug() << "TimeGen: " << vec[i].getTimeGeneration() << " Source: " <<vec[i].getNumberOfSource();
 }

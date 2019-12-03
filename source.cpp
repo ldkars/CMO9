@@ -1,4 +1,5 @@
 #include "source.h"
+#include <QDebug>
 
 Source::Source(int numberOfSource)
 {
@@ -6,8 +7,8 @@ Source::Source(int numberOfSource)
 }
 
 Request Source::generationReqest(){
-    this->time_generation = time_generation + 0.03;
-    Request request(time_generation, counter, numberOfSource);
-    counter++;// тут жопа
+    this->time_generation += + this->alpha + rand0to1()*(this->beta - this->alpha);
+    counter++;
+    Request request(this->time_generation, this->counter, this->numberOfSource);
     return request;
 }

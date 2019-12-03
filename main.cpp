@@ -4,12 +4,15 @@
 #include "request.h"
 #include "buffercontroller.h"
 #include "booc.h"
+#include "devicecontroller.h"
 int main()
 {
     size_t buffer_size = 9;
+    size_t count_device = 2;
 
     BufferController bufferController(buffer_size);
-    BOOC booc(bufferController);
+    DeviceController deviceController(count_device);
+    BOOC booc(bufferController, deviceController);
 
     booc.START();
 
