@@ -2,6 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "source.h"
+#include "request.h"
+#include "buffercontroller.h"
+#include "booc.h"
+#include "devicecontroller.h"
+#include <QDebug>
+#include "stepmode.h"
+#include "sourcecontrolleer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,6 +27,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_StepModeButton_clicked();
 
 private:
     Ui::MainWindow *ui;

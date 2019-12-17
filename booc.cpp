@@ -1,10 +1,11 @@
 #include "booc.h"
 #define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
-BOOC::BOOC(BufferController &bufferController, DeviceController &deviceController, double alpha, double beta, int count_source, int count_generation)
+BOOC::BOOC(BufferController &bufferController, DeviceController &deviceController, SourceControlleer &sourceController, double alpha, double beta, int count_source, int count_generation)
 {
     this->linkBufferController = &bufferController;
     this->linkDeviceController = &deviceController;
+    this->linkSourceController = &sourceController;
     this->alpha = alpha;
     this->beta = beta;
     this->count_source = count_source;
@@ -12,16 +13,26 @@ BOOC::BOOC(BufferController &bufferController, DeviceController &deviceControlle
 }
 
 void BOOC::START(){
-    std::vector<Source> vector_source;
-    for(int i = 1; i <= count_source; i++){
-        Source source(i, this->alpha, this->beta);
-        vector_source.push_back(source);
-    }
 
     for(int j = 0; j < this->count_generation; j++)
     {
-        for(int i = 0; i < vector_source.size(); i++){
-            linkBufferController->insert(vector_source[GetIndex(i, this->count_source)].generationReqest());
+        linkSourceController->PRINT_VECTOR_REQ();
+        qDebug() << "---------";
+        qDebug() << "Пришедшая заявка: " <<linkSourceController->getGhostRequest().getTimeGeneration();
+
+        if (linkDeviceController->getStatusInsert(linkSourceController->getGhostRequest())){
+            linkDeviceController->insert(linkSourceController->getRequest());
+            count_req++;
+        }else
+        {
+            if(!linkBufferController->insert(linkSourceController->getRequest())){
+                linkSourceController->generationRequest(linkBufferController->tmp_count_source);
+            }
+
+            count_req++;
+            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+                linkDeviceController->insert(linkBufferController->getRequest());
+            }
         }
 
         qDebug() << "------------------------";
@@ -41,8 +52,11 @@ void BOOC::START(){
         qDebug() <<"      STATUS BUFFER                 ";
         linkBufferController->buffPrint();
     }
+    percent_failure = linkBufferController->error / count_req;
+    qDebug() << " Вероятность отказа заявки: "<< percent_failure;
 
-
+    this->count_generation = ((1.643*1.643) * (1-percent_failure)) / (percent_failure*(0.1*0.1));
+    qDebug() << " new count: "<< this->count_generation;
 }
 
 

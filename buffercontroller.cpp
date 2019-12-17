@@ -2,27 +2,34 @@
 #include <QDebug>
 #define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
-BufferController::BufferController(size_t buffer_size)
+BufferController::BufferController(size_t buffer_size, SourceControlleer &sourceController)
 {
     this->buffer_size = buffer_size;
     this->pointer = 0;
+    this->linkSourceController = &sourceController;
+
     for(size_t i = 0; i < buffer_size; i++)
         vec.push_back(generationEmptyRequest());
+
     error = 0;
 }
 
-void BufferController::insert(Request request){
+bool BufferController::insert(Request request){
     for(size_t i = pointer; i < buffer_size * 2; i++){
         if(requestEmpty(vec[GetIndex(i, buffer_size)]))
         {
             vec[GetIndex(i, buffer_size)] = request;
             pointer = GetIndex(i + 1, buffer_size);
-            return;
+            return true;
         }
     }
     error++;
+    tmp_count_source = vec[pointer].getNumberOfSource();
+    //отказываем //TO-DO//pointer
+    //BOOC::vector_request.push_back(BOOC::vector_source[vec[pointer].getNumberOfSource()].generationReqest());
     vec[pointer] = request;
     pointer = GetIndex(pointer + 1, buffer_size);
+    return false;
 }
 
 Request BufferController::getRequest(){
@@ -49,6 +56,7 @@ Request BufferController::getRequest(){
 
     Request resault_request = vec_priority[index];
     vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
+    linkSourceController->generationRequest(resault_request.getNumberOfSource());
     return resault_request;
 }
 

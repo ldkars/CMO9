@@ -16,7 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    automode.cpp \
     booc.cpp \
+    boocstep.cpp \
     buffercontroller.cpp \
     device.cpp \
     devicecontroller.cpp \
@@ -24,20 +26,28 @@ SOURCES += \
     mainwindow.cpp \
     random.cpp \
     request.cpp \
-    source.cpp
+    source.cpp \
+    sourcecontrolleer.cpp \
+    stepmode.cpp
 
 HEADERS += \
+    automode.h \
     booc.h \
+    boocstep.h \
     buffercontroller.h \
     device.h \
     devicecontroller.h \
     mainwindow.h \
     random.h \
     request.h \
-    source.h
+    source.h \
+    sourcecontrolleer.h \
+    stepmode.h
 
 FORMS += \
-    mainwindow.ui
+    automode.ui \
+    mainwindow.ui \
+    stepmode.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
