@@ -13,6 +13,7 @@ public:
     void generationRequest(size_t number_source);
     //-------TEST_METHOD-------//
     void PRINT_VECTOR_REQ();
+    std::vector<Request> getVecReq(){return vector_request;}
 private:
     size_t count_source;
     std::vector<Request> vector_request;

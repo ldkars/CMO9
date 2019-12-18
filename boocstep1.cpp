@@ -1,11 +1,12 @@
-#include "boocstep.h"
+#include "boocstep1.h"
+
 #define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
-BoocStep::BoocStep(BufferController &bufferController, DeviceController &deviceController, SourceControlleer &sourceController, double alpha, double beta, int count_source)
+BoocStep::BoocStep(BufferController* &bufferController, DeviceController* &deviceController, SourceControlleer* &sourceController, double alpha, double beta, int count_source)
 {
-    this->linkBufferController = &bufferController;
-    this->linkDeviceController = &deviceController;
-    this->linkSourceController = &sourceController;
+    this->linkBufferController = bufferController;
+    this->linkDeviceController = deviceController;
+    this->linkSourceController = sourceController;
     this->alpha = alpha;
     this->beta = beta;
     this->count_source = count_source;
@@ -13,8 +14,9 @@ BoocStep::BoocStep(BufferController &bufferController, DeviceController &deviceC
 }
 
 void BoocStep::START(){
-
-    for(int j = 0; j < this->count_generation; j++)
+    test++;
+    qDebug() << "awdawd " << test;
+    /*for(int j = 0; j < this->count_generation; j++)
     {
         linkSourceController->PRINT_VECTOR_REQ();
         qDebug() << "---------";
@@ -56,7 +58,7 @@ void BoocStep::START(){
     qDebug() << " Вероятность отказа заявки: "<< percent_failure;
 
     this->count_generation = ((1.643*1.643) * (1-percent_failure)) / (percent_failure*(0.1*0.1));
-    qDebug() << " new count: "<< this->count_generation;
+    qDebug() << " new count: "<< this->count_generation;*/
 }
 
 

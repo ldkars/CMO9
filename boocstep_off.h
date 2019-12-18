@@ -1,23 +1,16 @@
-#ifndef BOOC_H
-#define BOOC_H
 #include "buffercontroller.h"
 #include "devicecontroller.h"
 #include "sourcecontrolleer.h"
 #include <vector>
 #include <QDebug>
 #include "source.h"
-#include "logevent.h"
 
-class BOOC
+class BoocStep
 {
 public:
-    BOOC(BufferController &bufferController, DeviceController &deviceController,SourceControlleer &sourceController ,double alpha, double beta, int count_source, int count_generation);
+    BoocStep(BufferController &bufferController, DeviceController &deviceController,SourceControlleer &sourceController ,double alpha, double beta, int count_source);
     void START();
     double percent_failure = 0.0;
-    std::vector<BufferController> vec_buff;
-    std::vector<DeviceController> vec_device;
-    std::vector<Request> vec_req;
-    std::vector<LogEvent> vec_log_event;
 private:
     BufferController *linkBufferController;
     DeviceController *linkDeviceController;
@@ -28,5 +21,3 @@ private:
     int count_generation = 0;
     double count_req = 0;
 };
-
-#endif // BOOC_H

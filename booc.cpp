@@ -19,6 +19,8 @@ void BOOC::START(){
         linkSourceController->PRINT_VECTOR_REQ();
         qDebug() << "---------";
         qDebug() << "Пришедшая заявка: " <<linkSourceController->getGhostRequest().getTimeGeneration();
+        vec_log_event.push_back(LogEvent().setnew_req("Пришла заявка от " + QString::number(12)));
+        vec_req.push_back(linkSourceController->getGhostRequest());
 
         if (linkDeviceController->getStatusInsert(linkSourceController->getGhostRequest())){
             linkDeviceController->insert(linkSourceController->getRequest());
@@ -51,7 +53,10 @@ void BOOC::START(){
         qDebug() << "Количество отказов: " << linkBufferController->error;
         qDebug() <<"      STATUS BUFFER                 ";
         linkBufferController->buffPrint();
+        vec_buff.push_back(*linkBufferController);
+        vec_device.push_back(*linkDeviceController);
     }
+
     percent_failure = linkBufferController->error / count_req;
     qDebug() << " Вероятность отказа заявки: "<< percent_failure;
 

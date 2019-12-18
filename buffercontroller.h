@@ -19,12 +19,11 @@ public:
 
     void BUFFTEST();
     void buffPrint();
-
+    std::vector<Request> vec;
     std::vector<Request> getBuffvec(){return vec;}
 private:
     size_t buffer_size, pointer;
     bool checkFree(Request request);
-    std::vector<Request> vec;
     int getMinNumberSource();
     bool requestEqualRequest(Request request1, Request request2);
     bool requestEmpty(Request request);

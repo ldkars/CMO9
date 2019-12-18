@@ -42,5 +42,5 @@ bool DeviceController::getStatusInsert(Request request){
 
 void DeviceController::TESTPRINTDEVICE(){
     for(size_t i = 0; i < count_device; i++)
-        qDebug() << "time: " <<vec_device[i].getTime() <<" NUMBER: " <<vec_device[i].getNumber();
+        qDebug() << "time: " <<vec_device[i].getTime();
 }

@@ -39,5 +39,8 @@ private:
     double alpha = 0.0;
     double beta = 0.0;
     double lambda = 0.0;
+    std::vector<Request> vec_request;
+    std::vector<BufferController> vec_buffer_controller;
+    std::vector<DeviceController> vec_device_controller;
 };
 #endif // MAINWINDOW_H

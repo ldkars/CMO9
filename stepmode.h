@@ -5,15 +5,20 @@
 #include "source.h"
 #include "request.h"
 #include "buffercontroller.h"
-#include "booc.h"
+//#include "booc.h"
+#include "boocstep1.h"
 #include "devicecontroller.h"
 #include <QString>
 #include <QStandardItemModel>
 #include <QDebug>
 #include <string>
+#include "sourcecontrolleer.h"
+#include <vector>
+#include "device.h"
 
 namespace Ui {
 class StepMode;
+class SourceControlleer;
 }
 
 class StepMode : public QDialog
@@ -30,10 +35,27 @@ public:
     void setAlpha(double alpha){this->alpha = alpha;}
     void setBeta(double beta){this->beta = beta;}
     void setLambda(double lambda){this->lambda = lambda;}
+    void initControllers(SourceControlleer &sourceController, BufferController &bufferController, DeviceController deviceController);
+
+    //--pub
+
+    void TESTPRINTDEVICE();
+    bool insert(Request request);
+    bool getStatusInsert(Request request);
+    size_t getCountDevice(){ return count_device;}
+
+    //---new
+    std::vector<Request> vec_request;
+    std::vector<BufferController> vec_buffer_controller;
+    std::vector<DeviceController> vec_device_controller;
+
 private slots:
     void on_pushButton_clicked();
     void initBuffGrid();
     void initSourceGrid();
+    void initDeviceGrid();
+    void on_pushButton_2_clicked();
+
 private:
     Ui::StepMode *ui;
     size_t buffer_size = 0;
@@ -44,11 +66,33 @@ private:
     double beta = 0.0;
     double lambda = 0.0;
     int buff_size = (int)(buffer_size);
+    bool b = false;
+
+    int INDEX = 0;
+
+    SourceControlleer *linkSourceController;
+    BufferController *linkBufferController;
+    DeviceController *linkDeviceController;
+    BoocStep *linkBoocStep;
 
     QStandardItemModel *model_buff;
     QStandardItemModel *model_source;
+    QStandardItemModel *model_device;
+
 
     int sizetToInt(size_t sizet);
+    DeviceController getDeviceController();
+    std::vector<DeviceController> vec_device_con;
+
+    //--priv
+    std::vector<Device> vec_device;
+    size_t pointer = 0;
+    int error;
+
+    void initDeviceController();
+
+    std::vector<double> vec_time_device;
+
 };
 
 #endif // STEPMODE_H

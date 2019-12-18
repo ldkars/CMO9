@@ -18,10 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     automode.cpp \
     booc.cpp \
-    boocstep.cpp \
+    boocstep1.cpp \
     buffercontroller.cpp \
     device.cpp \
     devicecontroller.cpp \
+    logevent.cpp \
     main.cpp \
     mainwindow.cpp \
     random.cpp \
@@ -33,10 +34,11 @@ SOURCES += \
 HEADERS += \
     automode.h \
     booc.h \
-    boocstep.h \
+    boocstep1.h \
     buffercontroller.h \
     device.h \
     devicecontroller.h \
+    logevent.h \
     mainwindow.h \
     random.h \
     request.h \
