@@ -48,6 +48,7 @@ public:
     std::vector<Request> vec_request;
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
+    std::vector<SourceControlleer> vec_source_controller;
 
 private slots:
     void on_pushButton_clicked();

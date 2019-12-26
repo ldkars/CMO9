@@ -12,50 +12,56 @@ BOOC::BOOC(BufferController &bufferController, DeviceController &deviceControlle
     this->count_generation = count_generation;
 }
 
+void BOOC::modeling(){
+    if(linkDeviceController->getStatusInsert(linkSourceController->getGhostRequest()))
+
+    {
+        if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+            linkDeviceController->insert(linkBufferController->getRequest());
+            qDebug() << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        }else{
+            linkDeviceController->insert(linkSourceController->getRequest());
+        }
+
+    }
+    else
+    {
+        if(!linkBufferController->insert(linkSourceController->getRequest())){
+            qDebug() << "кому то отказали";
+            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+                linkDeviceController->insert(linkBufferController->getRequest());
+                qDebug() << "ЗАБРАЛИ ИЗ БУФЕРА 1 ИФ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            }
+
+        }else
+        {
+            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+                linkDeviceController->insert(linkBufferController->getRequest());
+                qDebug() << "ЗАБРАЛИ ИЗ БУФЕРА 2 ИФ ЗАБРАЛИ ИЗ БУФЕРА 1 ИФ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            }
+        }
+    }
+
+
+    qDebug() << "----------------------------------------------";
+    qDebug() << "         DEVICES";
+    linkDeviceController->TESTPRINTDEVICE();
+    qDebug() << "Количество отказов: " << linkBufferController->error;
+    qDebug() <<"      STATUS BUFFER                 ";
+    linkBufferController->buffPrint();
+    vec_buff.push_back(*linkBufferController);
+    vec_device.push_back(*linkDeviceController);
+    vec_source.push_back(*linkSourceController);
+}
+
 void BOOC::START(){
 
     for(int j = 0; j < this->count_generation; j++)
     {
-        linkSourceController->PRINT_VECTOR_REQ();
-        qDebug() << "---------";
-        qDebug() << "Пришедшая заявка: " <<linkSourceController->getGhostRequest().getTimeGeneration();
-        vec_log_event.push_back(LogEvent().setnew_req("Пришла заявка от " + QString::number(12)));
-        vec_req.push_back(linkSourceController->getGhostRequest());
-
-        if (linkDeviceController->getStatusInsert(linkSourceController->getGhostRequest())){
-            linkDeviceController->insert(linkSourceController->getRequest());
-            count_req++;
-        }else
-        {
-            if(!linkBufferController->insert(linkSourceController->getRequest())){
-                linkSourceController->generationRequest(linkBufferController->tmp_count_source);
-            }
-
-            count_req++;
-            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
-                linkDeviceController->insert(linkBufferController->getRequest());
-            }
-        }
-
-        qDebug() << "------------------------";
-
-        linkBufferController->buffPrint();
-        for(int i = 0; i < linkBufferController->getBufferCountSize(); i++){
-            Request copyRequest = linkBufferController->getCopyRequest();
-            if(linkDeviceController->getStatusInsert(copyRequest)){
-                linkDeviceController->insert(linkBufferController->getRequest());
-            }
-        }
-
-        qDebug() << "----------------------------------------------";
-        qDebug() << "         DEVICES";
-        linkDeviceController->TESTPRINTDEVICE();
-        qDebug() << "Количество отказов: " << linkBufferController->error;
-        qDebug() <<"      STATUS BUFFER                 ";
-        linkBufferController->buffPrint();
-        vec_buff.push_back(*linkBufferController);
-        vec_device.push_back(*linkDeviceController);
+        modeling();
     }
+
+    vec_final_req_buff = linkBufferController->getBuffvec(); //окончание моделирования. Фиксируем последние заявки
 
     percent_failure = linkBufferController->error / count_req;
     qDebug() << " Вероятность отказа заявки: "<< percent_failure;

@@ -16,6 +16,7 @@ bool DeviceController::insert(Request request){
         {
             vec_device[GetIndex(i, count_device)].insert(request);
             pointer = GetIndex(i + 1, count_device);
+
             return true;
         }
     }
@@ -43,4 +44,8 @@ bool DeviceController::getStatusInsert(Request request){
 void DeviceController::TESTPRINTDEVICE(){
     for(size_t i = 0; i < count_device; i++)
         qDebug() << "time: " <<vec_device[i].getTime();
+}
+
+void DeviceController::checkDevice(){
+
 }

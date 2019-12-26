@@ -16,8 +16,10 @@ public:
     double percent_failure = 0.0;
     std::vector<BufferController> vec_buff;
     std::vector<DeviceController> vec_device;
+    std::vector<SourceControlleer> vec_source;
     std::vector<Request> vec_req;
     std::vector<LogEvent> vec_log_event;
+    std::vector<Request> vec_final_req_buff;
 private:
     BufferController *linkBufferController;
     DeviceController *linkDeviceController;
@@ -27,6 +29,7 @@ private:
     int count_source = 0;
     int count_generation = 0;
     double count_req = 0;
+    void modeling();
 };
 
 #endif // BOOC_H

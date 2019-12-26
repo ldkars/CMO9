@@ -11,16 +11,17 @@ public:
     Request getRequest();
     Request getGhostRequest();
     void generationRequest(size_t number_source);
+    std::vector<Request> getVecRequest(){return vector_request;}
+    std::vector<Source> getVecSource(){return vector_source;}
     //-------TEST_METHOD-------//
     void PRINT_VECTOR_REQ();
-    std::vector<Request> getVecReq(){return vector_request;}
+
 private:
     size_t count_source;
-    std::vector<Request> vector_request;
-    std::vector<Source> vector_source;
     double alpha;
     double beta;
-
+    std::vector<Request> vector_request;
+    std::vector<Source> vector_source;
     void init_source();
 };
 

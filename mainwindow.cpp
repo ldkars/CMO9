@@ -36,6 +36,7 @@ void MainWindow::on_pushButton_2_clicked()
 
     vec_buffer_controller = booc.vec_buff;
     vec_device_controller = booc.vec_device;
+    vec_source_controller = booc.vec_source;
     vec_request = booc.vec_req;
 }
 
@@ -58,6 +59,7 @@ void MainWindow::on_StepModeButton_clicked()
     window.vec_request = vec_request;
     window.vec_buffer_controller = vec_buffer_controller;
     window.vec_device_controller = vec_device_controller;
+    window.vec_source_controller = vec_source_controller;
 
     window.exec();
 

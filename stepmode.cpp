@@ -18,47 +18,9 @@ StepMode::~StepMode()
 void StepMode::on_pushButton_clicked()
 {
     initBuffGrid();
-    //initSourceGrid();
+    initSourceGrid();
     INDEX++;
     initDeviceGrid();
-
-    /*
-    initDeviceController();
-    linkSourceController->PRINT_VECTOR_REQ();
-    qDebug() << "---------";
-    qDebug() << "Пришедшая заявка: " <<linkSourceController->getGhostRequest().getTimeGeneration();
-
-    if (getStatusInsert(linkSourceController->getGhostRequest())){
-        insert(linkSourceController->getRequest());
-        //count_req++;
-
-    }else
-    {
-        if(!linkBufferController->insert(linkSourceController->getRequest())){
-            linkSourceController->generationRequest(linkBufferController->tmp_count_source);
-        }
-        //count_req++;
-        if(getStatusInsert(linkBufferController->getCopyRequest())){
-            insert(linkBufferController->getRequest());
-        }
-    }
-    qDebug() << "------------------------";
-
-    linkBufferController->buffPrint();
-    for(int i = 0; i < linkBufferController->getBufferCountSize(); i++){
-        Request copyRequest = linkBufferController->getCopyRequest();
-        if(getStatusInsert(copyRequest)){
-            insert(linkBufferController->getRequest());
-        }
-    }
-
-    qDebug() << "----------------------------------------------";
-    qDebug() << "         DEVICES";
-    TESTPRINTDEVICE();
-    qDebug() << "Количество отказов: " << linkBufferController->error;
-    qDebug() <<"      STATUS BUFFER                 ";
-    linkBufferController->buffPrint();*/
-
 }
 
 //---------PRIVATE METHOD-----------
@@ -112,11 +74,9 @@ void StepMode::initSourceGrid(){
         model_source->setData(index_source, "Source " + QString::number(i) + ":");
     }
 
-    std::vector<Request> vec_req;
-    vec_req = linkSourceController->getVecReq();
     for(int i = 0; i < sizetToInt(count_source); i++){
-        model_source->setData(model_source->index(i,1), vec_req[i].getTimeGeneration());
-        model_source->setData(model_source->index(i,2), vec_req[i].getNumberOfSource());
+        model_source->setData(model_source->index(i,1), vec_source_controller[INDEX].getVecRequest()[i].getTimeGeneration());
+        model_source->setData(model_source->index(i,2), vec_source_controller[INDEX].getVecRequest()[i].getNumberOfSource());
     }
 }
 
@@ -140,16 +100,12 @@ void StepMode::initDeviceGrid(){
 
 void StepMode::on_pushButton_2_clicked()
 {
-    SourceControlleer sourceController(this->count_source, this->alpha, this->beta);
-    BufferController bufferController(buffer_size, sourceController);
-    DeviceController deviceController(count_device, this->lambda);
-
-    linkSourceController = &sourceController;
-    linkBufferController = &bufferController;
-    linkDeviceController = &deviceController;
-
-
-   // this->sourceController = sourceController;
+    if(0 < INDEX){
+        INDEX--;
+    }
+    initBuffGrid();
+    initSourceGrid();
+    initDeviceGrid();
 }
 
 //--deviceCont

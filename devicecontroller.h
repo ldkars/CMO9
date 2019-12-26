@@ -15,6 +15,7 @@ public:
     bool getStatusInsert(Request request);
     size_t getCountDevice(){ return count_device;}
     std::vector<Device> vec_device;
+    void checkDevice();
 private:
     size_t count_device = 0;
     size_t pointer = 0;

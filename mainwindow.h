@@ -42,5 +42,6 @@ private:
     std::vector<Request> vec_request;
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
+    std::vector<SourceControlleer> vec_source_controller;
 };
 #endif // MAINWINDOW_H

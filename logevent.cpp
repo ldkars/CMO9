@@ -2,5 +2,4 @@
 
 LogEvent::LogEvent()
 {
-
 }
