@@ -69,16 +69,4 @@ void MainWindow::on_StepModeButton_clicked()
         QMessageBox::information(0, "Hey", "You most set config and press modeling!");
     }
 
-
 }
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    if(modeling){
-
-    }
-    else{
-        QMessageBox::information(0, "Hey", "You most set config and press modeling!");
-    }
-}
-
