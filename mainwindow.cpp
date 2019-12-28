@@ -31,7 +31,7 @@ void MainWindow::on_pushButton_2_clicked()
     SourceControlleer sourceController(this->count_source, this->alpha, this->beta);
     BufferController bufferController(buffer_size, sourceController);
     DeviceController deviceController(count_device, this->lambda);
-    BOOC booc(bufferController, deviceController, sourceController,this->alpha, this->beta, this->count_source, this->count_request);
+    BOOC booc(bufferController, deviceController, sourceController, this->count_request);
 
     booc.START();
 
@@ -81,3 +81,4 @@ void MainWindow::on_pushButton_3_clicked()
         QMessageBox::information(0, "Hey", "You most set config and press modeling!");
     }
 }
+
