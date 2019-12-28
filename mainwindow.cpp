@@ -27,6 +27,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    this->modeling = true;
     SourceControlleer sourceController(this->count_source, this->alpha, this->beta);
     BufferController bufferController(buffer_size, sourceController);
     DeviceController deviceController(count_device, this->lambda);
@@ -42,25 +43,41 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_StepModeButton_clicked()
 {
-    StepMode window;
-    window.setBeta(this->beta);
-    window.setAlpha(this->alpha);
-    window.setLambda(this->lambda);
-    window.setBufferSize(this->buffer_size);
-    window.setCountDevice(this->count_device);
-    window.setCountSource(this->count_source);
-    window.setCountRequest(this->count_request);
-    window.setModal(true);
-    SourceControlleer sourceController(this->count_source, this->alpha, this->beta);
-    BufferController bufferController(buffer_size, sourceController);
-    DeviceController deviceController(count_device, this->lambda);
-    window.initControllers(sourceController, bufferController, deviceController);
+    if(modeling){
+        StepMode window;
+        window.setBeta(this->beta);
+        window.setAlpha(this->alpha);
+        window.setLambda(this->lambda);
+        window.setBufferSize(this->buffer_size);
+        window.setCountDevice(this->count_device);
+        window.setCountSource(this->count_source);
+        window.setCountRequest(this->count_request);
+        window.setModal(true);
+        SourceControlleer sourceController(this->count_source, this->alpha, this->beta);
+        BufferController bufferController(buffer_size, sourceController);
+        DeviceController deviceController(count_device, this->lambda);
+        window.initControllers(sourceController, bufferController, deviceController);
 
-    window.vec_request = vec_request;
-    window.vec_buffer_controller = vec_buffer_controller;
-    window.vec_device_controller = vec_device_controller;
-    window.vec_source_controller = vec_source_controller;
+        window.vec_request = vec_request;
+        window.vec_buffer_controller = vec_buffer_controller;
+        window.vec_device_controller = vec_device_controller;
+        window.vec_source_controller = vec_source_controller;
 
-    window.exec();
+        window.exec();
+    }
+    else{
+        QMessageBox::information(0, "Hey", "You most set config and press modeling!");
+    }
 
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    if(modeling){
+
+    }
+    else{
+        QMessageBox::information(0, "Hey", "You most set config and press modeling!");
+    }
 }

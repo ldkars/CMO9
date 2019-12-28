@@ -10,6 +10,7 @@
 #include <QDebug>
 #include "stepmode.h"
 #include "sourcecontrolleer.h"
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,5 +44,6 @@ private:
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
     std::vector<SourceControlleer> vec_source_controller;
+    bool modeling = false;
 };
 #endif // MAINWINDOW_H
