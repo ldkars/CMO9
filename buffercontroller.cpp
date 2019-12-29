@@ -25,30 +25,14 @@ bool BufferController::insert(Request request){
 }
 
 Request BufferController::getRequest(){
-    std::vector<Request> vec_priority; //содержит самые "свежие" заявки
+    vec_priority.clear();
+    vec_priority = getPreorityRequest(); //preority numberSource
+    Request resault_request = findMinTimeReqest(vec_priority);
 
-    // поиск по приоритету источника
-    for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() == getMinNumberSource())
-            vec_priority.push_back(vec[i]);
-    }
+    deleteRequest(resault_request);
 
-    double min_time = vec_priority[0].getTimeGeneration();
-    size_t index = 0; // поиск индекса минимального по времени
-    for(size_t i = 0; i < vec_priority.size(); i++){
-        if(vec_priority[i].getTimeGeneration() < min_time){
-            min_time = vec_priority[i].getTimeGeneration();
-            index = i;
-        }
-    }
-
-    for(size_t i = 0; i < buffer_size; i++)
-        if(requestEqualRequest(vec_priority[index], vec[i]))
-            vec[i] = getEmptyRequest();
-
-    Request resault_request = vec_priority[index];
-    vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
     linkSourceController->generationRequest(resault_request.getNumberOfSource());
+
     return resault_request;
 }
 
@@ -133,12 +117,34 @@ int BufferController::getBufferCountSize(){
     return buffersize;
 }
 
+std::vector<Request> BufferController::getPreorityRequest(){
+    std::vector<Request> vec_priority;
+    for(size_t i = 0; i < buffer_size; i++){
+        if(vec[i].getNumberOfSource() == getMinNumberSource())
+            vec_priority.push_back(vec[i]);
+    }
+    return vec_priority;
+}
 
+Request BufferController::findMinTimeReqest(std::vector<Request> &vec_request){
+    double min_time = vec_request[0].getTimeGeneration();
+    size_t index = 0;
+    for(size_t i = 0; i < vec_request.size(); i++){
+        if(vec_request[i].getTimeGeneration() < min_time){
+            min_time = vec_request[i].getTimeGeneration();
+            index = i;
+        }
+    }
+}
 
-
-
-
-
+void BufferController::deleteRequest(Request request){
+    for(size_t i = 0; i < buffer_size; i++){
+        if(requestEqualRequest(request, vec[i]))
+        {
+            vec[i] = getEmptyRequest();
+        }
+    }
+}
 
 //TESTFUNC
 

@@ -39,7 +39,10 @@ private:
 
     SourceControlleer *linkSourceController;
 
-
+    std::vector<Request> getPreorityRequest();
+    Request findMinTimeReqest(std::vector<Request> &vec_request);
+    void deleteRequest(Request request);
+    std::vector<Request> vec_priority;
 };
 
 #endif // BUFFERCONTROLLER_H
