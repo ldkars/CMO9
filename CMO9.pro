@@ -18,7 +18,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     automode.cpp \
     booc.cpp \
-    boocstep1.cpp \
     buffercontroller.cpp \
     device.cpp \
     devicecontroller.cpp \
@@ -34,7 +33,6 @@ SOURCES += \
 HEADERS += \
     automode.h \
     booc.h \
-    boocstep1.h \
     buffercontroller.h \
     device.h \
     devicecontroller.h \
