@@ -6,7 +6,6 @@
 #include "request.h"
 #include "buffercontroller.h"
 //#include "booc.h"
-#include "boocstep1.h"
 #include "devicecontroller.h"
 #include <QString>
 #include <QStandardItemModel>
@@ -74,7 +73,6 @@ private:
     SourceControlleer *linkSourceController;
     BufferController *linkBufferController;
     DeviceController *linkDeviceController;
-    BoocStep *linkBoocStep;
 
     QStandardItemModel *model_buff;
     QStandardItemModel *model_source;
