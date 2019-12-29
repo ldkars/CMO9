@@ -5,13 +5,8 @@
 BufferController::BufferController(size_t buffer_size, SourceControlleer &sourceController)
 {
     this->buffer_size = buffer_size;
-    this->pointer = 0;
     this->linkSourceController = &sourceController;
-
-    for(size_t i = 0; i < buffer_size; i++)
-        vec.push_back(generationEmptyRequest());
-
-    error = 0;
+    initVectorEmpty();
 }
 
 bool BufferController::insert(Request request){
@@ -24,9 +19,6 @@ bool BufferController::insert(Request request){
         }
     }
     error++;
-    tmp_count_source = vec[pointer].getNumberOfSource();
-    //отказываем //TO-DO//pointer
-    //BOOC::vector_request.push_back(BOOC::vector_source[vec[pointer].getNumberOfSource()].generationReqest());
     vec[pointer] = request;
     pointer = GetIndex(pointer + 1, buffer_size);
     return false;
@@ -172,4 +164,10 @@ void BufferController::buffDelete(size_t index){
 void BufferController::buffPrint(){
     for(size_t i = 0; i < buffer_size; i++)
         qDebug() << "TimeGen: " << vec[i].getTimeGeneration() << " Source: " <<vec[i].getNumberOfSource();
+}
+
+void BufferController::initVectorEmpty(){
+    for(size_t i = 0; i < buffer_size; i++){
+        vec.push_back(generationEmptyRequest());
+    }
 }

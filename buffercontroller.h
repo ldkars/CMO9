@@ -9,31 +9,37 @@ class BufferController
 {
 public:
     BufferController(size_t buffer_size, SourceControlleer &sourceController);
+
     bool insert(Request request);
+
     Request getRequest();
     Request getCopyRequest();
-    double error;
     size_t getBufferSize(){ return buffer_size;}
-    int getBufferCountSize();
-    size_t tmp_count_source; // выколите мои глаза! to-do
+    int getBufferCountSize(); //количество заявкой
+    std::vector<Request> getBuffvec(){return vec;}
+
+    double error = 0.0;
 
     void BUFFTEST();
     void buffPrint();
+
     std::vector<Request> vec;
-    std::vector<Request> getBuffvec(){return vec;}
+
 private:
-    size_t buffer_size, pointer;
+    size_t buffer_size;
+    size_t pointer = 0;
     bool checkFree(Request request);
     int getMinNumberSource();
     bool requestEqualRequest(Request request1, Request request2);
     bool requestEmpty(Request request);
     Request getEmptyRequest();
-    //TESTING
     void buffDelete(size_t index);
-
     Request generationEmptyRequest();
+    void initVectorEmpty();
 
     SourceControlleer *linkSourceController;
+
+
 };
 
 #endif // BUFFERCONTROLLER_H
