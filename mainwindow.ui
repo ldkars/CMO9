@@ -161,7 +161,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Beta</string>
+     <string>beta</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">

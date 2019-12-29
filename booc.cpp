@@ -1,4 +1,4 @@
-#include "booc.h"
+#include "booc.h"//
 #define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
 BOOC::BOOC(BufferController &bufferController, DeviceController &deviceController, SourceControlleer &sourceController, int count_generation)

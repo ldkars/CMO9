@@ -7,7 +7,7 @@
 #include <QDebug>
 #include "source.h"
 #include "logevent.h"
-
+//
 class BOOC
 {
 public:
