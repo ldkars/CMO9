@@ -26,6 +26,7 @@ Request SourceControlleer::getRequest(){
 
     vector_request.erase(vector_request.begin() + index);
     generationRequest(tmp_request.getNumberOfSource());
+    requestInSystems.push_back(tmp_request);
     return tmp_request;
 }
 
