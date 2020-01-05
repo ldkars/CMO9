@@ -21,8 +21,9 @@ public:
     size_t getBufferSize(){ return buffer_size;}
 
     std::vector<Request> getBuffvec(){return vec;}
-    std::vector<Request> getFailureRequest(size_t number_source);
+    std::vector<Request> getFailureRequest(int number_source);
     std::vector<Request> vec;
+    std::vector<Request> occupiedReq; //Понадобится для определения времени пребывания заявок, которые были выбиты
 
     double error = 0.0;
 

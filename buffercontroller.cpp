@@ -18,6 +18,10 @@ bool BufferController::insert(Request request){
         }
     }
     error++;
+
+    failureRequest.push_back(vec[pointer]);
+    occupiedReq.push_back(request);
+
     vec[pointer] = request;
     pointer = GetIndex(pointer + 1, buffer_size);
     return false;
@@ -120,6 +124,16 @@ void BufferController::initVectorEmpty(){
     for(size_t i = 0; i < buffer_size; i++){
         vec.push_back(getEmptyRequest());
     }
+}
+
+std::vector<Request> BufferController::getFailureRequest(int number_source){
+    std::vector<Request> failureRequestSource;
+    for(size_t i = 0; i < failureRequest.size(); i++){
+        if(failureRequest[i].getNumberOfSource() == number_source){
+            failureRequestSource.push_back(failureRequest[i]);
+        }
+    }
+    return failureRequestSource;
 }
 
 //TESTFUNC
