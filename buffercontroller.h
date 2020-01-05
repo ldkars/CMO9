@@ -5,6 +5,9 @@
 #include "vector"
 #include <QDebug>
 #include "sourcecontrolleer.h"
+
+#define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
+
 class BufferController
 {
 public:

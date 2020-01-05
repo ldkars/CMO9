@@ -1,6 +1,5 @@
 #include "buffercontroller.h"
 #include <QDebug>
-#define GetIndex(_index,_size) ( ( (_index%_size) + _size )%_size )
 
 BufferController::BufferController(size_t buffer_size, SourceControlleer &sourceController)
 {
@@ -106,12 +105,12 @@ Request BufferController::findMinTimeReqest(std::vector<Request> &vec_request){
             index = i;
         }
     }
+    return vec_request[index];
 }
 
 void BufferController::deleteRequest(Request request){
     for(size_t i = 0; i < buffer_size; i++){
-        if(requestEqualRequest(request, vec[i]))
-        {
+        if(requestEqualRequest(request, vec[i])){
             vec[i] = getEmptyRequest();
         }
     }
@@ -125,8 +124,9 @@ void BufferController::initVectorEmpty(){
 
 //TESTFUNC
 void BufferController::buffPrint(){
-    for(size_t i = 0; i < buffer_size; i++)
+    for(size_t i = 0; i < buffer_size; i++){
         qDebug() << "TimeGen: " << vec[i].getTimeGeneration() << " Source: " <<vec[i].getNumberOfSource();
+    }
 }
 
 
