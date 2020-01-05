@@ -71,3 +71,24 @@ void MainWindow::on_StepModeButton_clicked()
 
 
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    if(modeling){
+        AutoMode window;
+        window.setBufferSize(this->buffer_size);
+        window.setCountDevice(this->count_device);
+        window.setCountSource(this->count_source);
+        window.setCountRequest(this->count_request);
+        window.setModal(true);
+
+        window.vec_buffer_controller = vec_buffer_controller;
+        window.vec_device_controller = vec_device_controller;
+        window.vec_source_controller = vec_source_controller;
+
+        window.exec();
+    }
+    else{
+        QMessageBox::information(0, "Hey", "You most set config and press modeling!");
+    }
+}

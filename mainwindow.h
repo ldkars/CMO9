@@ -9,6 +9,7 @@
 #include "devicecontroller.h"
 #include <QDebug>
 #include "stepmode.h"
+#include "automode.h"
 #include "sourcecontrolleer.h"
 #include <QMessageBox>
 
@@ -30,6 +31,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_StepModeButton_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
