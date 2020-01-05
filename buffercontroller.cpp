@@ -37,25 +37,9 @@ Request BufferController::getRequest(){
 }
 
 Request BufferController::getCopyRequest(){
-    std::vector<Request> vec_priority; //содержит самые "свежие" заявки
-
-    // поиск по приоритету источника
-    for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() == getMinNumberSource())
-            vec_priority.push_back(vec[i]);
-    }
-
-    double min_time = vec_priority[0].getTimeGeneration();
-    size_t index = 0; // поиск индекса минимального по времени
-    for(size_t i = 0; i < vec_priority.size(); i++){
-        if(vec_priority[i].getTimeGeneration() < min_time){
-            min_time = vec_priority[i].getTimeGeneration();
-            index = i;
-        }
-    }
-
-    Request resault_request = vec_priority[index];
-    vec_priority[index] = getEmptyRequest(); // bug //1decembber: what this bug?
+    vec_priority.clear();
+    vec_priority = getPreorityRequest(); //preority numberSource
+    Request resault_request = findMinTimeReqest(vec_priority);
     return resault_request;
 }
 
