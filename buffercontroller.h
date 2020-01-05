@@ -14,35 +14,42 @@ public:
 
     Request getRequest();
     Request getCopyRequest();
+
     size_t getBufferSize(){ return buffer_size;}
-    int getBufferCountSize(); //количество заявкой
+
+    int getBufferCountSize();
+
     std::vector<Request> getBuffvec(){return vec;}
+    std::vector<Request> vec;
 
     double error = 0.0;
 
-    void BUFFTEST();
     void buffPrint();
 
-    std::vector<Request> vec;
+
 
 private:
     size_t buffer_size;
     size_t pointer = 0;
-    bool checkFree(Request request);
+
     int getMinNumberSource();
+
+    bool checkFree(Request request);
     bool requestEqualRequest(Request request1, Request request2);
     bool requestEmpty(Request request);
+
     Request getEmptyRequest();
-    void buffDelete(size_t index);
     Request generationEmptyRequest();
-    void initVectorEmpty();
+    Request findMinTimeReqest(std::vector<Request> &vec_request);
+
 
     SourceControlleer *linkSourceController;
 
     std::vector<Request> getPreorityRequest();
-    Request findMinTimeReqest(std::vector<Request> &vec_request);
-    void deleteRequest(Request request);
     std::vector<Request> vec_priority;
+
+    void initVectorEmpty();
+    void deleteRequest(Request request);
 };
 
 #endif // BUFFERCONTROLLER_H

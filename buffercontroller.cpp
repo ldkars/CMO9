@@ -146,34 +146,16 @@ void BufferController::deleteRequest(Request request){
     }
 }
 
-//TESTFUNC
-
-void BufferController::BUFFTEST(){
-
-    for(size_t i = 0; i < buffer_size; i++)
-        insert(Request(228, i, 1));
-
-    buffDelete(0);
-    buffPrint();
-
-    insert(Request(1, 1, 1)); // контрольный пакет, смотреть совпадения
-
-    buffPrint();
-    // надеюсь я найду время, чтобы написать хороший boost тест
-    //PS. проверил вставка кореектна, на концах в том числею
-}
-
-void BufferController::buffDelete(size_t index){
-    vec[index] = Request(0,0,0);
-}
-
-void BufferController::buffPrint(){
-    for(size_t i = 0; i < buffer_size; i++)
-        qDebug() << "TimeGen: " << vec[i].getTimeGeneration() << " Source: " <<vec[i].getNumberOfSource();
-}
-
 void BufferController::initVectorEmpty(){
     for(size_t i = 0; i < buffer_size; i++){
         vec.push_back(generationEmptyRequest());
     }
 }
+
+//TESTFUNC
+void BufferController::buffPrint(){
+    for(size_t i = 0; i < buffer_size; i++)
+        qDebug() << "TimeGen: " << vec[i].getTimeGeneration() << " Source: " <<vec[i].getNumberOfSource();
+}
+
+
