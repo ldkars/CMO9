@@ -37,9 +37,9 @@ Request BufferController::getRequest(){
 }
 
 Request BufferController::getCopyRequest(){
-    vec_priority.clear();
-    vec_priority = getPreorityRequest(); //preority numberSource
-    Request resault_request = findMinTimeReqest(vec_priority);
+    std::vector<Request> vec_priority2;//это c++ детка, и тут это называется костыль
+    vec_priority2 = getPreorityRequest(); //preority numberSource
+    Request resault_request = findMinTimeReqest(vec_priority2);
     return resault_request;
 }
 
