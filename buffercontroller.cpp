@@ -24,7 +24,7 @@ bool BufferController::insert(Request request){
 }
 
 Request BufferController::getRequest(){
-    vec_priority.clear();
+    std::vector<Request> vec_priority;
     vec_priority = getPreorityRequest(); //preority numberSource
     Request resault_request = findMinTimeReqest(vec_priority);
 

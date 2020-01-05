@@ -21,6 +21,7 @@ public:
     size_t getBufferSize(){ return buffer_size;}
 
     std::vector<Request> getBuffvec(){return vec;}
+    std::vector<Request> getFailureRequest(size_t number_source);
     std::vector<Request> vec;
 
     double error = 0.0;
@@ -42,11 +43,10 @@ private:
     Request getEmptyRequest();
     Request findMinTimeReqest(std::vector<Request> &vec_request);
 
-
     SourceControlleer *linkSourceController;
 
     std::vector<Request> getPreorityRequest();
-    std::vector<Request> vec_priority;
+    std::vector<Request> failureRequest;
 
     void initVectorEmpty();
     void deleteRequest(Request request);
