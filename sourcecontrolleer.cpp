@@ -26,7 +26,6 @@ Request SourceControlleer::getRequest(){
 
     vector_request.erase(vector_request.begin() + index);
     generationRequest(tmp_request.getNumberOfSource());
-    qDebug() << "сгенерировали от источника " << tmp_request.getNumberOfSource();
     return tmp_request;
 }
 
@@ -48,6 +47,16 @@ void SourceControlleer::generationRequest(size_t number_source){
     Request request = vector_source[number_source].generationReqest();
     qDebug() << "time: " << request.getTimeGeneration();
     vector_request.push_back(request);
+}
+
+std::vector<Request> SourceControlleer::getReqInSystems(int number_source){
+    std::vector<Request> tmp_requestInSystems;
+    for(size_t i = 0; i < requestInSystems.size(); i++){
+        if(requestInSystems[i].getNumberOfSource() == number_source){
+            tmp_requestInSystems.push_back(requestInSystems[i]);
+        }
+    }
+    return tmp_requestInSystems;
 }
 
 //------TEST METHOD-----------
