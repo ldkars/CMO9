@@ -17,8 +17,6 @@ public:
 
     size_t getBufferSize(){ return buffer_size;}
 
-    int getBufferCountSize();
-
     std::vector<Request> getBuffvec(){return vec;}
     std::vector<Request> vec;
 
@@ -39,7 +37,6 @@ private:
     bool requestEmpty(Request request);
 
     Request getEmptyRequest();
-    Request generationEmptyRequest();
     Request findMinTimeReqest(std::vector<Request> &vec_request);
 
 

@@ -44,8 +44,8 @@ Request BufferController::getCopyRequest(){
 }
 
 int BufferController::getMinNumberSource(){
-    size_t min_number_source = 3; // to-do
-    size_t tmp = 0; // ужас
+    size_t min_number_source = 10000;
+    size_t tmp = 0;
 
     for(size_t i = 0; i < vec.size(); i++){
         if(vec[i].getNumberOfSource() > tmp){
@@ -55,8 +55,9 @@ int BufferController::getMinNumberSource(){
     min_number_source = tmp;
 
     for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() < min_number_source)
+        if(vec[i].getNumberOfSource() < min_number_source){
             min_number_source = vec[i].getNumberOfSource();
+        }
     }
     return min_number_source;
 }
@@ -64,41 +65,27 @@ int BufferController::getMinNumberSource(){
 bool BufferController::requestEmpty(Request request){
     if(request.getTimeGeneration() == 0.0
                     && request.getCounter() == 0
-                      && request.getNumberOfSource() == 200)
+                      && request.getNumberOfSource() == 200){
         return true;
-    else false;
+    }
+    else{
+        return false;
+    }
 }
 
 bool BufferController::requestEqualRequest(Request request1, Request request2){
     if(request1.getTimeGeneration() == request2.getTimeGeneration()
             && request1.getCounter() == request2.getCounter()
-                && request1.getNumberOfSource() == request2.getNumberOfSource())
-    {
+                && request1.getNumberOfSource() == request2.getNumberOfSource()){
         return true;
     }
-    else return false;
-}
-
-
-Request BufferController::generationEmptyRequest(){
-    return Request(0,0,200);
+    else{
+        return false;
+    }
 }
 
 Request BufferController::getEmptyRequest(){
     return Request(0,0,200);
-}
-
-int BufferController::getBufferCountSize(){
-    int buffersize = 0;
-    for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getCounter() == getEmptyRequest().getCounter()
-                && vec[i].getNumberOfSource() == getEmptyRequest().getNumberOfSource()
-                  && vec[i].getTimeGeneration() == getEmptyRequest().getTimeGeneration()){
-        }else{
-            buffersize++;
-        }
-    }
-    return buffersize;
 }
 
 std::vector<Request> BufferController::getPreorityRequest(){
@@ -132,7 +119,7 @@ void BufferController::deleteRequest(Request request){
 
 void BufferController::initVectorEmpty(){
     for(size_t i = 0; i < buffer_size; i++){
-        vec.push_back(generationEmptyRequest());
+        vec.push_back(getEmptyRequest());
     }
 }
 
