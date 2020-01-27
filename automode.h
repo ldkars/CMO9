@@ -36,17 +36,33 @@ public:
     std::vector<DeviceController> vec_device_controller;
     std::vector<SourceControlleer> vec_source_controller;
 
+private slots:
+    void on_modelingButton_clicked();
+
 private:
     Ui::AutoMode *ui;
 
     size_t buffer_size = 0;
     size_t count_device = 0;
     size_t count_source = 0;
+
     int count_request = 0;
+    int buff_size = (int)(buffer_size);
+    int sizetToInt(size_t sizet);
+
     double alpha = 0.0;
     double beta = 0.0;
     double lambda = 0.0;
-    int buff_size = (int)(buffer_size);
+
+    QStandardItemModel *model_source;
+    QStandardItemModel *model_device;
+
+    QModelIndex index_source;
+    QModelIndex index_device;
+
+    void initSourceGrid();
+    void initDeviceGrid();
+
 };
 
 #endif // AUTOMODE_H
