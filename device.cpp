@@ -13,6 +13,9 @@ void Device::insert(Request request){
     this->counter++;
     T_SUMM += time;
     T_SERVICE += time - delta_time;
+
+    request.releaseTime = this->time;
+    completedReq.push_back(request);
 }
 
 double Device::getT_SERVICE(){
