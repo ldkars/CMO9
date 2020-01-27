@@ -19,6 +19,7 @@ void AutoMode::on_modelingButton_clicked()
     initDeviceGrid();
 
     reqproc();
+    reqfail();
 }
 
 //PRIV
@@ -82,7 +83,10 @@ void AutoMode::reqproc(){
 }
 
 void AutoMode::reqfail(){
-
+    for(int i = 0; i < sizetToInt(count_source); i++){
+        model_source->setData(model_source->index(i, 2),
+                              vec_buffer_controller[vec_buffer_controller.size() - 1].getFailureRequest(i).size());
+    }
 }
 
 void AutoMode::timeSystem(){
