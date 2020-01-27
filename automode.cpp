@@ -20,6 +20,7 @@ void AutoMode::on_modelingButton_clicked()
 
     reqproc();
     reqfail();
+    timeSystem();
 }
 
 //PRIV
@@ -90,7 +91,36 @@ void AutoMode::reqfail(){
 }
 
 void AutoMode::timeSystem(){
+    std::vector<Request> merge_req = vec_device_controller[vec_device_controller.size() - 1].vec_device[0].completedReq;
 
+    if(count_device > 0){
+        for(int i = 1; i < sizetToInt(count_device); i++){
+             merge_req.insert(merge_req.end(), vec_device_controller[vec_device_controller.size() - 1].vec_device[i].completedReq.begin(),
+                     vec_device_controller[vec_device_controller.size() - 1].vec_device[i].completedReq.end());
+        }
+    }
+
+    for(int i = 0; i < sizetToInt(count_source); i++)
+    {
+        std::vector<Request> tmp_req;
+
+        for(int j = 0; j < sizetToInt(merge_req.size()); j++){
+            if(merge_req[j].getNumberOfSource() == i){
+                tmp_req.push_back(merge_req[j]);
+            }
+        }
+
+        double time_in_system = 0.0;
+        //P.S Не учитываю время тех заявок, что получили отказ, но тоже по факту находились в системе
+        for(int j = 0; j < sizetToInt(tmp_req.size()); j++){
+            time_in_system += tmp_req[j].releaseTime - tmp_req[j].getTimeGeneration();
+        }
+
+        int tmp_count_req = vec_source_controller[vec_source_controller.size() - 1].getReqInSystems(i).size();
+        model_source->setData(model_source->index(i, 3),
+                                  time_in_system / tmp_count_req);
+
+    }
 }
 
 void AutoMode::timeWait(){
