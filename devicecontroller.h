@@ -10,16 +10,23 @@ class DeviceController
 {
 public:
     DeviceController(size_t count_device, double lambda);
+
     void TESTPRINTDEVICE();
+    void checkDevice();
+
     bool insert(Request request);
     bool getStatusInsert(Request request);
+
     size_t getCountDevice(){ return count_device;}
+
     std::vector<Device> vec_device;
-    void checkDevice();
+
 private:
     size_t count_device = 0;
     size_t pointer = 0;
+
     int error;
+
     double lambda = 0;
 };
 

@@ -36,6 +36,7 @@ private:
     size_t pointer = 0;
 
     int getMinNumberSource();
+    int sizetToInt(size_t sizet);
 
     bool checkFree(Request request);
     bool requestEqualRequest(Request request1, Request request2);

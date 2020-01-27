@@ -51,14 +51,14 @@ int BufferController::getMinNumberSource(){
     size_t tmp = 0;
 
     for(size_t i = 0; i < vec.size(); i++){
-        if(vec[i].getNumberOfSource() > tmp){
+        if(vec[i].getNumberOfSource() > sizetToInt(tmp)){
             tmp = vec[i].getNumberOfSource();
         }
     }
     min_number_source = tmp;
 
     for(size_t i = 0; i < buffer_size; i++){
-        if(vec[i].getNumberOfSource() < min_number_source){
+        if(vec[i].getNumberOfSource() <sizetToInt(min_number_source)){
             min_number_source = vec[i].getNumberOfSource();
         }
     }
@@ -134,6 +134,12 @@ std::vector<Request> BufferController::getFailureRequest(int number_source){
         }
     }
     return failureRequestSource;
+}
+
+int BufferController::sizetToInt(size_t sizet){
+    int tmp = 0;
+    for(size_t i = 0; i < sizet; i++){tmp++;}
+    return tmp;
 }
 
 //TESTFUNC
