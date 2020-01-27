@@ -25,13 +25,17 @@ public:
 
     //-------TEST_METHOD-------//
     void PRINT_VECTOR_REQ();
+
 private:
     size_t count_source;
+
     double alpha;
     double beta;
+
     std::vector<Request> vector_request;
     std::vector<Request> requestInSystems;
     std::vector<Source> vector_source;
+
     void init_source();
 };
 
