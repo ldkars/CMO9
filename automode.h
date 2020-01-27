@@ -35,6 +35,7 @@ public:
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
     std::vector<SourceControlleer> vec_source_controller;
+    std::vector<Request> vec_final_req_buff;
 
 private slots:
     void on_modelingButton_clicked();
@@ -49,6 +50,7 @@ private:
     int count_request = 0;
     int buff_size = (int)(buffer_size);
     int sizetToInt(size_t sizet);
+    int getCountReqSource(int number_source);
 
     double alpha = 0.0;
     double beta = 0.0;
@@ -62,6 +64,15 @@ private:
 
     void initSourceGrid();
     void initDeviceGrid();
+
+    void reqproc();
+    void reqfail();
+    void timeSystem();
+    void timeWait();
+    void timeProc();
+    void dispTOF();
+    void dispTOP();
+    void probfail();
 
 };
 

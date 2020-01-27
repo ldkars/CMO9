@@ -40,6 +40,7 @@ HEADERS += \
     mainwindow.h \
     random.h \
     request.h \
+    sizetoint.h \
     source.h \
     sourcecontrolleer.h \
     stepmode.h

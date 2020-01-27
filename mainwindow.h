@@ -47,6 +47,7 @@ private:
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
     std::vector<SourceControlleer> vec_source_controller;
+    std::vector<Request> vec_final_req_buff;
     bool modeling = false;
 };
 #endif // MAINWINDOW_H
