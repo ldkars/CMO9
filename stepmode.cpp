@@ -1,6 +1,7 @@
 #include "stepmode.h"
 #include "ui_stepmode.h"
 
+
 StepMode::StepMode(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StepMode)
@@ -45,6 +46,7 @@ int StepMode::sizetToInt(size_t sizet){
     for(size_t i = 0; i < sizet; i++){tmp++;}
     return tmp;
 }
+
 
 void StepMode::initBuffGrid(){
     int buffer_size_tmp = sizetToInt(vec_buffer_controller[INDEX].getBufferSize());

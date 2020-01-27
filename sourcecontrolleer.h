@@ -21,6 +21,8 @@ public:
 
     std::vector<Source> getVecSource(){return vector_source;}
 
+    size_t getCountSource(){return vector_source.size();}
+
     //-------TEST_METHOD-------//
     void PRINT_VECTOR_REQ();
 private:

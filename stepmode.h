@@ -14,6 +14,7 @@
 #include "sourcecontrolleer.h"
 #include <vector>
 #include "device.h"
+#include "sizetoint.h"
 
 namespace Ui {
 class StepMode;
@@ -78,12 +79,11 @@ private:
     QStandardItemModel *model_source;
     QStandardItemModel *model_device;
 
-
-    int sizetToInt(size_t sizet);
     DeviceController getDeviceController();
     std::vector<DeviceController> vec_device_con;
 
     //--priv
+    int sizetToInt(size_t sizet);
     std::vector<Device> vec_device;
     size_t pointer = 0;
     int error;
