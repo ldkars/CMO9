@@ -113,8 +113,7 @@ void AutoMode::timeSystem(){
         }
 
         int tmp_count_req = vec_source_controller[vec_source_controller.size() - 1].getReqInSystems(i).size();
-        model_source->setData(model_source->index(i, 3),
-                                  time_in_system / tmp_count_req);
+        model_source->setData(model_source->index(i, 3), time_in_system / tmp_count_req);
 
     }
 }
