@@ -22,19 +22,13 @@ void BOOC::modeling(){
     }
     else
     {
-        if(!linkBufferController->insert(linkSourceController->getRequest()))
-        {
-            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest()))
-            {
-                linkDeviceController->insert(linkBufferController->getRequest());
-            }
+        Request request = linkSourceController->getRequest();
+        request.insertBuffTime = request.getTimeGeneration();
 
-        }else
-        {
-            if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest()))
-            {
-                linkDeviceController->insert(linkBufferController->getRequest());
-            }
+        linkBufferController->insert(request);
+
+        if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+            linkDeviceController->insert(linkBufferController->getRequest());
         }
     }
 
