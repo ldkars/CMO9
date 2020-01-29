@@ -1,5 +1,6 @@
 #ifndef AUTOMODE_H
 #define AUTOMODE_H
+#define COUNT_PARAMETRS 9
 
 #include <QDialog>
 #include "source.h"

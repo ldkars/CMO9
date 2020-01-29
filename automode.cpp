@@ -31,7 +31,7 @@ int AutoMode::sizetToInt(size_t sizet){
 }
 
 void AutoMode::initSourceGrid(){
-    this->model_source = new QStandardItemModel(count_source, 9 , this);
+    this->model_source = new QStandardItemModel(count_source, COUNT_PARAMETRS , this);
     ui->sourceView->setModel(model_source);
 
     for(int i = 0; i < sizetToInt(count_source); i++){
@@ -39,15 +39,11 @@ void AutoMode::initSourceGrid(){
         model_source->setData(index_source, "Source " + QString::number(i) + ":");
     }
 
-    model_source->setHeaderData(0, Qt::Horizontal, tr("Source"));
-    model_source->setHeaderData(1, Qt::Horizontal, tr("Req. proc."));
-    model_source->setHeaderData(2, Qt::Horizontal, tr("Req. fail"));
-    model_source->setHeaderData(3, Qt::Horizontal, tr("Time in system"));
-    model_source->setHeaderData(4, Qt::Horizontal, tr("Time of wait"));
-    model_source->setHeaderData(5, Qt::Horizontal, tr("Time of process."));
-    model_source->setHeaderData(6, Qt::Horizontal, tr("Disp. TOF"));
-    model_source->setHeaderData(7, Qt::Horizontal, tr("Disp. TOP"));
-    model_source->setHeaderData(8, Qt::Horizontal, tr("Prob. of fail"));
+    std::vector<QString> vec_param_name = {"Source", "Req. proc.", "Req. fail", "Time in system",
+                                           "Time of wait", "Time of process.","Disp. TOF", "Disp. TOP", "Prob. of fail"};
+    for(int i = 0; i < COUNT_PARAMETRS; i++){
+        model_source->setHeaderData(i, Qt::Horizontal, vec_param_name[i]);
+    }
 }
 
 void AutoMode::initDeviceGrid(){
