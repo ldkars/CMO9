@@ -21,6 +21,8 @@ void AutoMode::on_modelingButton_clicked()
     reqproc();
     reqfail();
     timeSystem();
+    timeProc();
+    probfail();
 }
 
 //PRIV
@@ -123,7 +125,35 @@ void AutoMode::timeWait(){
 }
 
 void AutoMode::timeProc(){
+    /*std::vector<Request> merge_req = vec_device_controller[vec_device_controller.size() - 1].vec_device[0].completedReq;
 
+    if(count_device > 0){
+        for(int i = 1; i < sizetToInt(count_device); i++){
+             merge_req.insert(merge_req.end(), vec_device_controller[vec_device_controller.size() - 1].vec_device[i].completedReq.begin(),
+                     vec_device_controller[vec_device_controller.size() - 1].vec_device[i].completedReq.end());
+        }
+    }
+
+    for(int i = 0; i < sizetToInt(count_source); i++)
+    {
+        std::vector<Request> tmp_req;
+
+        for(int j = 0; j < sizetToInt(merge_req.size()); j++){
+            if(merge_req[j].getNumberOfSource() == i){
+                tmp_req.push_back(merge_req[j]);
+            }
+        }
+
+        double release_time = 0.0;
+
+        for(int j = 0; j < sizetToInt(tmp_req.size()); j++){
+            release_time += tmp_req[j].releaseTime - tmp_req[j].insertDeviceTime;
+        }
+
+        int tmp_count_req = vec_source_controller[vec_source_controller.size() - 1].getReqInSystems(i).size();
+        model_source->setData(model_source->index(i, 5), release_time / tmp_count_req);*/
+
+    }
 }
 
 void AutoMode::dispTOF(){
@@ -135,5 +165,11 @@ void AutoMode::dispTOP(){
 }
 
 void AutoMode::probfail(){
+    double tmp_count_req = 0.0;
 
+    for(int i = 0; i < sizetToInt(count_source); i++){ //find final req on source
+        tmp_count_req = vec_source_controller[vec_source_controller.size() - 1].getReqInSystems(i).size() + getCountReqSource(i);
+        model_source->setData(model_source->index(i, 8),
+                              vec_buffer_controller[vec_buffer_controller.size() - 1].getFailureRequest(i).size() / tmp_count_req);
+    }
 }
