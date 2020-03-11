@@ -33,7 +33,7 @@ int AutoMode::sizetToInt(size_t sizet){
 }
 
 void AutoMode::initSourceGrid(){
-    this->model_source = new QStandardItemModel(count_source, COUNT_PARAMETRS , this);
+    this->model_source = new QStandardItemModel(count_source, 4 , this);
     ui->sourceView->setModel(model_source);
 
     for(int i = 0; i < sizetToInt(count_source); i++){
@@ -41,9 +41,8 @@ void AutoMode::initSourceGrid(){
         model_source->setData(index_source, "Source " + QString::number(i) + ":");
     }
 
-    std::vector<QString> vec_param_name = {"Source", "Req. proc.", "Req. fail", "Time in system",
-                                           "Time of wait", "Time of process.","Disp. TOF", "Disp. TOP", "Prob. of fail"};
-    for(int i = 0; i < COUNT_PARAMETRS; i++){
+    std::vector<QString> vec_param_name = {"Source", "Req. proc.", "Req. fail", "Prob. of fail"};
+    for(int i = 0; i < 4; i++){
         model_source->setHeaderData(i, Qt::Horizontal, vec_param_name[i]);
     }
 }

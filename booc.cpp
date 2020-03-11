@@ -15,30 +15,19 @@ void BOOC::modeling(){
         if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest()))
         {
             linkDeviceController->insert(linkBufferController->getRequest());
-        }else
-        {
-            linkDeviceController->insert(linkSourceController->getRequest());
         }
-    }
-    else
-    {
-        Request request = linkSourceController->getRequest();
-        request.insertBuffTime = request.getTimeGeneration();
 
-        linkBufferController->insert(request);
-
-        if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
-            linkDeviceController->insert(linkBufferController->getRequest());
-        }
     }
 
+    Request request = linkSourceController->getRequest();
+    request.insertBuffTime = request.getTimeGeneration();
 
-    qDebug() << "----------------------------------------------";
-    qDebug() << "         DEVICES";
-    linkDeviceController->TESTPRINTDEVICE();
-    qDebug() << "Количество отказов: " << linkBufferController->error;
-    qDebug() <<"      STATUS BUFFER                 ";
-    linkBufferController->buffPrint();
+    linkBufferController->insert(request);
+
+    if(linkDeviceController->getStatusInsert(linkBufferController->getCopyRequest())){
+        linkDeviceController->insert(linkBufferController->getRequest());
+    }
+
     vec_buff.push_back(*linkBufferController);
     vec_device.push_back(*linkDeviceController);
     vec_source.push_back(*linkSourceController);
@@ -54,6 +43,15 @@ void BOOC::START(){
     vec_final_req_buff = linkBufferController->getBuffvec(); //окончание моделирования. Фиксируем последние заявки
 
     percent_failure = linkBufferController->error / count_req;
+}
+
+void BOOC::TEST(){
+    qDebug() << "----------------------------------------------";
+    qDebug() << "         DEVICES";
+    linkDeviceController->TESTPRINTDEVICE();
+    qDebug() << "Количество отказов: " << linkBufferController->error;
+    qDebug() <<"      STATUS BUFFER                 ";
+    linkBufferController->buffPrint();
 }
 
 

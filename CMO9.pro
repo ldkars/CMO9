@@ -36,7 +36,6 @@ HEADERS += \
     buffercontroller.h \
     device.h \
     devicecontroller.h \
-    logevent.h \
     mainwindow.h \
     random.h \
     request.h \

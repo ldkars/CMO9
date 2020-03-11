@@ -137,6 +137,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <double>2000.990000000000009</double>
+    </property>
     <property name="singleStep">
      <double>0.100000000000000</double>
     </property>
@@ -149,6 +152,9 @@
       <width>111</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <double>2000.990000000000009</double>
     </property>
     <property name="singleStep">
      <double>0.100000000000000</double>
@@ -188,6 +194,9 @@
       <width>111</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <double>2000.990000000000009</double>
     </property>
     <property name="singleStep">
      <double>0.100000000000000</double>
@@ -252,7 +261,7 @@
      <x>0</x>
      <y>0</y>
      <width>711</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCMO">

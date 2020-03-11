@@ -3,7 +3,7 @@
 #include <vector>
 #include "request.h"
 #include "random.h"
-#include "logevent.h"
+//#include "logevent.h"
 class Device
 {
 public:

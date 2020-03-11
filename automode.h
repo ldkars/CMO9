@@ -6,7 +6,6 @@
 #include "source.h"
 #include "request.h"
 #include "buffercontroller.h"
-//#include "booc.h"
 #include "devicecontroller.h"
 #include <QString>
 #include <QStandardItemModel>
@@ -36,6 +35,7 @@ public:
     std::vector<BufferController> vec_buffer_controller;
     std::vector<DeviceController> vec_device_controller;
     std::vector<SourceControlleer> vec_source_controller;
+
     std::vector<Request> vec_final_req_buff;
 
 private slots:
