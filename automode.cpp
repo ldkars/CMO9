@@ -84,8 +84,9 @@ void AutoMode::reqproc(){
 void AutoMode::reqfail(){
     for(int i = 0; i < sizetToInt(count_source); i++){
         model_source->setData(model_source->index(i, 2),
-                              vec_buffer_controller[vec_buffer_controller.size() - 1].getFailureRequest(i).size());
+                              sizetToInt(vec_buffer_controller[vec_buffer_controller.size() - 1].getFailureRequest(i).size()));
     }
+    //vec_buffer_controller[vec_buffer_controller.size() - 1].getFailureRequest(i).size()
 }
 
 void AutoMode::timeSystem(){
@@ -153,7 +154,7 @@ void AutoMode::timeProc(){
         int tmp_count_req = vec_source_controller[vec_source_controller.size() - 1].getReqInSystems(i).size();
         model_source->setData(model_source->index(i, 5), release_time / tmp_count_req);*/
 
-    }
+   // }
 }
 
 void AutoMode::dispTOF(){
