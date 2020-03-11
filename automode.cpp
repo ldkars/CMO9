@@ -57,6 +57,11 @@ void AutoMode::initDeviceGrid(){
         model_device->setData(index_device, "Device " + QString::number(i) + ":");
     }
 
+    for(int i = 0; i < sizetToInt(count_device); i++){
+        index_device = model_device->index(i,1);
+        model_device->setData(index_device, 228);
+    }
+
     model_device->setHeaderData(0, Qt::Horizontal, tr("Device"));
     model_device->setHeaderData(1, Qt::Horizontal, tr("Coefficient"));
 }

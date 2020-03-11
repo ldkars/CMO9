@@ -11,6 +11,7 @@ DeviceController::DeviceController(size_t count_device, double lambda)
 }
 
 bool DeviceController::insert(Request request){
+    TESTPRINTDEVICE();
     for(size_t i = pointer; i < count_device * 2; i++)
     {
         if(request.getTimeGeneration() > vec_device[GetIndex(i, count_device)].getTime())
@@ -20,10 +21,20 @@ bool DeviceController::insert(Request request){
             vec_device[GetIndex(i, count_device)].insert(request);
             pointer = GetIndex(i + 1, count_device);
 
+            clearDevice(request.getTimeGeneration());
+
             return true;
         }
     }
     return false;
+}
+
+void DeviceController::clearDevice(double time_generation){
+    for(int i = 0; i < vec_device.size(); i++){
+        if(vec_device[i].getTime() < time_generation){
+            vec_device[i].setTime(0.0);
+        }
+    }
 }
 
 bool DeviceController::getStatusInsert(Request request){
@@ -40,6 +51,7 @@ bool DeviceController::getStatusInsert(Request request){
     }
     return false;
 }
+
 
 
 /*TESTING*/

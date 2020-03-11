@@ -19,6 +19,8 @@ public:
 
     size_t getCountDevice(){ return count_device;}
 
+    void clearDevice(double time_generation);
+
     std::vector<Device> vec_device;
 
 private:
