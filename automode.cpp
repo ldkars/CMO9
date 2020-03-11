@@ -57,9 +57,27 @@ void AutoMode::initDeviceGrid(){
         model_device->setData(index_device, "Device " + QString::number(i) + ":");
     }
 
+    //method
+    std::vector<Device> tmp_vec_device;
+    double device_free = 0;
     for(int i = 0; i < sizetToInt(count_device); i++){
+        for(int j = 0; j < sizetToInt(vec_device_controller.size()); j++){
+            tmp_vec_device.push_back(vec_device_controller[j].vec_device[i]);
+        }
+
+        device_free = 0;
+        for(int j = 0; j < sizetToInt(tmp_vec_device.size()); j++){
+            if(tmp_vec_device[j].getTime() == 0.0){
+                device_free++;
+            }
+        }
+
+        double coefficient = 1 - (device_free / sizetToInt(vec_device_controller.size()));
+
         index_device = model_device->index(i,1);
-        model_device->setData(index_device, 228);
+        model_device->setData(index_device, coefficient);
+
+        tmp_vec_device.clear();
     }
 
     model_device->setHeaderData(0, Qt::Horizontal, tr("Device"));
